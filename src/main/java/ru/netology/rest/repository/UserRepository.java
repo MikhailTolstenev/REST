@@ -4,6 +4,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 import ru.netology.rest.model.Authorities;
+import ru.netology.rest.model.User;
 
 import java.util.*;
 
@@ -12,14 +13,15 @@ import java.util.*;
 public class UserRepository {
 
 
-    public List<Authorities> getUserAuthorities(String user, String password) {
-        Map<String, String> users = new HashMap<>();
+    public List<Authorities> getUserAuthorities(User user) {
+        //Map<User, List<Authorities>> users = new HashMap<>();
         //test
-        String user1 = "admin";
-        String password1 = "1234";
-        users.put(user1, password1);
         List<Authorities> testAuthorities = List.of(Authorities.READ, Authorities.DELETE, Authorities.WRITE);
-        if ( users.get(user).equals(password)) {
+        User testUser = new User();
+        testUser.setName("admin");
+        testUser.setPassword("1234");
+        //users.put(testUser,testAuthorities);
+        if ( testUser.getPassword().equals(user.getPassword())  ) {
 
             return testAuthorities;
         }
